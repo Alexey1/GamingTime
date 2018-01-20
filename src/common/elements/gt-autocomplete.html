@@ -1,0 +1,27 @@
+<template class="gt-act">
+    <require from="./gt-autocomplete.css"></require>
+    <!-- using keydown.trigger instead of keydown delegate
+            to be able to stop propagation to avoid triggering a command -->
+    <mdc-textfield placeholder="mode"
+        input-id.one-time="utility.getUniqueId()"
+        value.two-way="text"
+        input.delegate="onInput()"
+        blur.delegate="onBlur()"
+        keydown.trigger="onKeydown($event)"
+        view-model.ref="txtMode"></mdc-textfield>
+    <label class="gt-act-glyph"
+        click.delegate="onArrowClick()"
+        for.bind="txtMode.inputId"></label>
+    <label for.bind="txtMode.inputId"
+        element.ref="dropdownElement"
+        class="gt-act-dropdown mdc-simple-menu mdc-select__menu ${isDropdownOpen ? 'mdc-simple-menu--open' : ''}">
+        <ul class="mdc-list mdc-simple-menu__items">
+            <li class="au-animate mdc-list-item ${item == highlightedItem ? 'gt-app-active-item' : ''}"
+                click.delegate="onItemClick(item)"
+                data-item.bind="item"
+                repeat.for="item of items">${item}</li>
+        </ul>
+        <gt-loading-icon class="gt-app-center"
+            if.bind="isLoading"></gt-loading-icon>
+    </label>
+</template>

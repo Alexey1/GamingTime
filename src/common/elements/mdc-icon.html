@@ -1,0 +1,8 @@
+<template class="${disabled ? 'gt-app-icon-disabled': ''}"
+    style="display: inline-block">
+    <i class="mdc-icon-toggle material-icons"
+        keydown.trigger="onKeydown($event)"
+        element.ref="iconElement">
+        <slot></slot>
+    </i>
+</template>

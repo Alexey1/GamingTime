@@ -1,0 +1,31 @@
+.gt-act
+    --gt-act-glyph-width 3rem
+    position relative
+    z-index 1 //to prevent buttons under dropdown from interfering
+    > input
+        margin-right var(--gt-act-glyph-width)
+    .gt-act-glyph
+        display flex
+        position absolute
+        top 0
+        bottom 0
+        right 0
+        width var(--gt-act-glyph-width)
+        cursor pointer
+        &::after
+            content ''
+            display block
+            width 0
+            height 0
+            margin auto
+            border-left 0.3rem solid transparent
+            border-right 0.3rem solid transparent
+            border-top 0.3rem solid var(--gt-glyph)
+    .gt-act-dropdown
+        width 100%
+        height 15rem
+        position absolute
+        top calc(100% + 1px)
+        max-height initial
+        > ul
+            width 100%

@@ -1,0 +1,45 @@
+<template>
+    <require from="material-components-web/material-components-web.css"></require>
+    <require from="./app.css"></require>
+    <require from="./resources/elements/gt-match-order-builder"></require>
+    <require from="./resources/elements/gt-options"></require>
+    <require from="./resources/elements/gt-match-details"></require>
+    <require from="./resources/elements/gt-servers-filter"></require>
+    <div class="gt-app mdc-typography">
+        <div class="gt-app-content au-animate"
+            tabindex="-1"
+            data-shortcut-names="open-match-order-builder, open-options, open-match-details"
+            if.bind="isLoaded">
+            <div class="gt-app-wip">work in progress</div>
+            <div class="gt-app-main-content">
+                <gt-match-order-builder class="au-animate"
+                    open-servers-filter.call="activeTab = 'servers-filter'"
+                    view-model.ref="matchOrderBuilderCmnt"
+                    if.bind="activeTab == 'match-order-builder'"></gt-match-order-builder>
+                <gt-options class="au-animate"
+                    close.call="activeTab = 'match-order-builder'"
+                    if.bind="activeTab == 'options'"></gt-options>
+                <gt-match-details class="au-animate"
+                    model.bind="model.matchModel"
+                    close.call="activeTab = 'match-order-builder'"
+                    if.bind="activeTab == 'match-details'"></gt-match-details>
+                <gt-servers-filter class="au-animate"
+                    model.bind="model.matchOrderBuilderModel.matchOrderModel"
+                    close.call="activeTab = 'match-order-builder'"
+                    if.bind="activeTab == 'servers-filter'"></gt-servers-filter>
+            </div>
+            <gt-surface class="gt-app-status">
+                <gt-tooltip text.bind="'gt-app.icon-open-options' & t">
+                    <mdc-icon click.trigger="toggleOptions()">settings</mdc-icon>
+                </gt-tooltip>
+                <gt-tooltip text.bind="'gt-app.icon-open-match-details' & t">
+                    <mdc-icon click.trigger="toggleMatchDetails()">info</mdc-icon>
+                </gt-tooltip>
+            </gt-surface>
+        </div>
+        <div class="gt-app-loading au-animate"
+            if.bind="!isLoaded">
+            <gt-loading-icon></gt-loading-icon>
+        </div>
+    </div>
+</template>

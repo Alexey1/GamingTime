@@ -1,0 +1,99 @@
+vendors = official
+
+@require './material-icons.styl'
+@require './roboto.styl'
+@require './mdc-overrides.styl'
+
+@keyframes fadeIn
+    0%
+        opacity 0
+    100%
+        opacity 1
+
+@keyframes fadeOut
+    0%
+        opacity 1
+    100%
+        opacity 0
+
+.au-enter
+    opacity 0
+.au-enter-active
+    animation fadeIn 0.3s
+.au-leave-active
+    animation fadeOut 0.3s
+
+body
+    margin 0
+    padding 0
+
+.gt-app
+    --gt-default-margin 0.5rem
+    --gt-app-bg #fafafa
+    --gt-surface-bg white
+    --gt-status-bg #e0e0e0
+    --gt-text-primary var(--mdc-theme-text-primary-on-light, rgba(0, 0, 0, 0.87))
+    --gt-text-secondary var(--mdc-theme-text-secondary-on-light, rgba(0, 0, 0, 0.54))
+    --gt-text-disabled var(--mdc-theme-text-disabled-on-light, rgba(0, 0, 0, 0.38))
+    --gt-glyph rgba(0, 0, 0, 0.54)
+    --gt-active-item-bg rgba(0,0,0,0.12)
+    --gt-focused-active-item-bg rgba(0,0,0,0.18)
+    &.mdc-theme--dark
+        --gt-app-bg #303030
+        --gt-status-bg #212121
+        --gt-surface-bg #424242
+        --gt-text-primary var(--mdc-theme-text-primary-on-dark, white)
+        --gt-text-secondary var(--mdc-theme-text-secondary-on-dark, rgba(255, 255, 255, 0.7))
+        --gt-text-disabled var(--mdc-theme-text-disabled-on-dark, rgba(255, 255, 255, 0.5))
+        --gt-glyph rgba(255, 255, 255, 0.54)
+        --gt-active-item-bg rgba(255,255,255,0.12)
+        --gt-focused-active-item-bg rgba(255,255,255,0.18)
+    height 100vh
+    display flex
+    flex-direction column
+    background-color var(--gt-app-bg)
+    color var(--gt-text-primary)
+    overflow hidden
+    position relative
+    > *
+        position absolute
+        top 0
+        left 0
+        right 0
+        bottom 0
+    *
+        box-sizing border-box
+        outline 0
+    .gt-app-wip
+        background-color hsl(0, 100%, 50%)
+        color white
+        padding: var(--gt-default-margin)
+        box-shadow inset 0 0 4rem 0 hsla(0, 0%, 0%, 0.7)
+        text-align center
+        text-transform uppercase
+    .gt-app-content
+        flex-grow 1
+        display flex
+        flex-direction column
+        .gt-app-main-content
+            flex-grow 1
+            display flex
+            position relative
+            margin var(--gt-default-margin)
+            > *
+                position absolute
+                top 0
+                left 0
+                right 0
+                bottom 0
+        .gt-app-status
+            background-color var(--gt-status-bg)
+        .gt-app-icon-disabled
+            pointer-events none
+        .gt-app-text-secondary
+            color var(--gt-text-secondary, gt-text-secondary)
+    .gt-app-loading
+        flex-grow 1
+        display flex
+        justify-content center
+        align-items center

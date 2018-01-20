@@ -1,0 +1,10 @@
+<template class="gt-ot">
+    <require from="./gt-options-theme.css"></require>
+    <template repeat.for="theme of themes">
+        <mdc-radio name="gt-ot-theme"
+            model.bind="theme.name"
+            checked.bind="optionsModel.theme">
+            ${theme.title}
+        </mdc-radio>
+    </template>
+</template>

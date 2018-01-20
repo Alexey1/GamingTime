@@ -1,0 +1,30 @@
+<!-- the element is not intended to be focusable 
+but in FF it becomes focusable when it has scroll,
+therefore using tabindex="-1" -->
+<template class="gt-lst">
+    <require from="./gt-list.css"></require>
+    <div class="gt-lst-content-wrapper"
+        tabindex="-1"
+        keydown.delegate="onKeydown($event)"
+        element.ref="contentWrapperElement">
+        <div class="gt-lst-content"
+            element.ref="contentElement">
+            <template repeat.for="item of items">
+                <div class.bind="(selectedItem == item ? 'gt-lst-item-active' : '') + ' gt-lst-item au-animate ' + itemCssClass"
+                    tabindex.bind="(selectedItem == item) ? 0 : -1"
+                    model.bind="item"
+                    element.ref="itemElement"
+                    mousedown.delegate="onItemMouseDown(itemElement)">
+                    <template part="item-template"
+                        replaceable></template>
+                </div>
+            </template>
+            <div class="gt-lst-more-lbl gt-app-text-secondary au-animate"
+                if.bind="isLblMoreVisible">
+                ... and more
+            </div>
+        </div>
+    </div>
+    <gt-loading-icon if.bind="isLoading"
+        class="gt-app-center"></gt-loading-icon>
+</template>

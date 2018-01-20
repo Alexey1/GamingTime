@@ -1,0 +1,14 @@
+<template class="gt-or">
+    <require from='./gt-options-region.css'></require>
+    <div>
+        <mdc-radio repeat.for="region of commonData.regions"
+            model.bind="region"
+            checked.bind="optionsModel.region"
+            name="gt-or-region">
+            ${region.title}
+        </mdc-radio>
+    </div>
+    <mdc-button class="gt-or-btn-reset-regions"
+        click.delegate="resetGameRegions()"
+        kind="stroked">reset regions per game</mdc-button>
+</template>

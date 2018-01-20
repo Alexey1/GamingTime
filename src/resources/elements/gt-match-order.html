@@ -1,0 +1,32 @@
+<template class="gt-mog"
+    data-shortcut-names="open-servers-filter">
+    <require from="./gt-servers-filter"></require>
+    <require from="./gt-match-order.css"></require>
+    <div>
+        <gt-select items.bind="commonData.regions"
+            selected-item-changing.call="regionChanging({region: highlightedItem})"
+            selected-item.two-way="model.region"></gt-select>
+    </div>
+    <div class="gt-mog-mode-row">
+        <gt-autocomplete placeholder="mode"
+            items.bind="modes"
+            input.delegate="modesRequested($event.target.value)"
+            dropdown-opened.call="modesRequested('')"
+            selected-item.two-way="model.mode"
+            is-loading.bind="isLoadingModes"
+            class="gt-mog-mode"></gt-autocomplete>
+        <mdc-textfield class="gt-mog-players-count"
+            maxlength="3"
+            placeholder="#+ players"
+            value.two-way="model.playersCount"></mdc-textfield>
+    </div>
+    <gt-tooltip class="gt-mog-btn-open-servers-filter-tooltip"
+        disabled.bind="disabled"
+        disabled-text.bind="disabledText"
+        shortcut-name.bind="'open-servers-filter'">
+        <mdc-button class="gt-mog-btn-open-servers-filter"
+            disabled.bind="disabled"
+            click.delegate="onOpenServersFilter()"
+            kind.bind="model.gameServersFilter.gameServers.length > 0 ? 'unelevated' : 'stroked'">filter servers</mdc-button>
+    </gt-tooltip>
+</template>

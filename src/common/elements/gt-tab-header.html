@@ -1,0 +1,8 @@
+<template class="gt-th"
+    bindable="close">
+    <require from="./gt-tab-header.css"></require>
+    <mdc-icon click.delegate="close()">arrow_back</mdc-icon>
+    <div class="mdc-typography--title">
+        <slot></slot>
+    </div>
+</template>

@@ -1,0 +1,31 @@
+{
+    "gt-app": {
+        "icon-open-options": "options",
+        "icon-open-match-details": "your last match details"
+    },
+    "gt-mobl": {
+        "btn-search-match-text-start": "start",
+        "btn-search-match-text-cancel": "cancel",
+        "btn-search-match-disabled-text": "Please, add some matches.",
+        "btn-add-match": "add match",
+        "icon-save-match-order-list": "save match order",
+        "icon-save-match-order-list-disabled-text": "Please, add some matches.",
+        "icon-restore-match-order-list": "restore match order",
+        "icon-restore-match-order-list-disabled-text-empty": "Please, save match order first.",
+        "icon-restore-match-order-list-disabled-text-searching": "Match order can't be changed when match search is active.",
+        "lbl-match-order-count": "items count / max items count",
+        "icon-clear-match-order-list": "clear match order",
+        "icon-clear-match-order-list-disabled-text-empty": "Match order is already empty.",
+        "icon-clear-match-order-list-disabled-text-searching": "Match order can't be changed when match search is active."
+    },
+    "gt-mod": {
+        "icon-edit": "edit copy",
+        "icon-remove": "remove",
+        "icon-edit-disabled-text-searching": "Match order can't be changed when match search is active.",
+        "icon-edit-disabled-text-unavailable-game": "Please, enable this game in options.",
+        "icon-remove-disabled-text": "Match order can't be changed when match search is active."
+    },
+    "gt-mog": {
+        "disabled-text": "Please, pick a mode."
+    }
+}

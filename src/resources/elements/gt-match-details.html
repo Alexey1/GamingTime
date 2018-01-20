@@ -1,0 +1,86 @@
+<template class="gt-md">
+    <require from="./gt-match-details.css"></require>
+    <gt-tab-header close.call="close()">match details</gt-tab-header>
+    <div if.bind="!model"
+        class="gt-md-content mdc-typography--headline">
+        <div>
+            You don't have a match yet.
+        </div>
+        <div>
+            You will be notified when your match is found.
+        </div>
+    </div>
+    <div if.bind="model"
+        class="gt-md-content">
+        <div class="mdc-typography--headline gt-md-details-header">
+            <div if.bind="isMatchFresh">
+                <div>
+                    Your match has just been found!
+                </div>
+                <div>
+                    Please, join the match now!
+                </div>
+            </div>
+            <div if.bind="!isMatchFresh">
+                Your match has been found ${timeAgoText}.
+            </div>
+        </div>
+        <div class="gt-md-join-info">
+            <div class="mdc-typography--caption gt-app-text-secondary">How to join:</div>
+            <div if.bind="model.game.gameHost == 'game-host1'">
+                <div class="mdc-typography--caption gt-app-text-secondary">
+                    Enter the link below in game browser:
+                </div>
+                <div class="mdc-typography--headline">
+                    ${model.serverLink}
+                </div>
+            </div>
+            <div if.bind="model.game.gameHost == 'game-host2'">
+                <div class="mdc-typography--caption gt-app-text-secondary">
+                    Use the following address:
+                </div>
+                <div class="mdc-typography--headline">
+                    ${model.serverIp}
+                </div>
+            </div>
+        </div>
+
+        <div class="gt-md-game-info">
+            <div class="mdc-typography--caption gt-app-text-secondary">
+                game
+            </div>
+            <div class="mdc-typography--subheading2">
+                ${model.game.title}
+            </div>
+            <div class="mdc-typography--caption gt-app-text-secondary">
+                mode
+            </div>
+            <div class="mdc-typography--subheading2">
+                ${model.mode}
+            </div>
+            <div class="mdc-typography--caption gt-app-text-secondary">
+                server
+            </div>
+            <div class="mdc-typography--subheading2">
+                ${model.serverTitle}
+            </div>
+        </div>
+        <div class="mdc-typography--caption gt-app-text-secondary">
+            At the moment of this notification:
+        </div>
+        <div class="mdc-typography--caption gt-md-match-numbers">
+            <div>
+                <span class="mdc-typography--body1">${model.playersCount} </span>
+                <span class="gt-app-text-secondary">players are/were in the server</span>
+            </div>
+            <div>
+                <span class="mdc-typography--body1">${model.usersCount} </span>
+                <span class="gt-app-text-secondary">users were invited in this match</span>
+            </div>
+            <div>
+                <span class="mdc-typography--body1">${model.playersCount + model.usersCount} </span>
+                <span class="gt-app-text-secondary">potential players in total</span>
+            </div>
+        </div>
+    </div>
+</template>

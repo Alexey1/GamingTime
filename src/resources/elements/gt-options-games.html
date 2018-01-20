@@ -1,0 +1,12 @@
+<template class="gt-og">
+    <require from="./gt-options-games.css"></require>
+    <gt-list items.bind="gameItems"
+        item-css-class="gt-og-list-item"
+        class="gt-og-list">
+        <template replace-part="item-template">
+            <mdc-checkbox checked.two-way="item.isSelected"
+                disabled.bind="item.disabled"></mdc-checkbox>
+            ${item.game.title}
+        </template>
+    </gt-list>
+</template>

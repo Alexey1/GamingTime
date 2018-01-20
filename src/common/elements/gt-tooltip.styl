@@ -1,0 +1,27 @@
+.gt-ttp
+    .gt-ttp-content
+        position fixed
+        z-index 1
+        left 0
+        top 0
+        max-width 30rem
+        pointer-events none
+        visibility hidden
+        opacity 0
+        transition visibility 150ms, opacity 150ms
+        color var(--mdc-theme-text-secondary-on-dark, rgba(255, 255, 255, 0.7))
+        font-weight 500
+        font-size 0.75rem
+        text-align center
+        &.gt-ttp-show
+            visibility visible
+            opacity 1
+            transition-delay 500ms
+        .gt-ttp-content-background
+            margin var(--gt-default-margin) 0
+            border-radius 2px
+            background-color #373737
+            //prevent margin collapse of this element and nested element
+            display inline-block 
+            > div
+                margin var(--gt-default-margin)

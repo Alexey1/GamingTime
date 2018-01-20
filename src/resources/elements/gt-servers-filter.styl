@@ -1,0 +1,40 @@
+.gt-sf
+    display flex
+    flex-direction column
+    flex-grow 1
+    .gt-sf-content
+        display flex
+        flex-grow 1
+        > gt-surface
+            flex-grow 1
+            flex-basis 0
+            margin var(--gt-default-margin)
+            display flex
+            flex-direction column
+    .gt-sf-controls-part
+        display flex
+        align-items center
+        flex-basis 3rem
+        margin var(--gt-default-margin)
+        margin-right 0
+        > *:not(.sty)
+            margin 0 var(--gt-default-margin)
+        .gt-sf-servers-lookup
+            flex-grow 1
+            > input
+                width 100%
+        .gt-sf-servers-count
+           margin-left auto 
+    .gt-sf-controls-right-part
+        margin-left 0
+    .gt-sf-list
+        flex-grow 1
+        flex-basis 0
+        .gt-sf-server
+            display flex
+            padding var(--gt-default-margin)
+            flex-grow 1
+            .gt-sf-server-info
+                display flex
+                flex-grow 1
+                flex-direction column

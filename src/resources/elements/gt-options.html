@@ -1,0 +1,24 @@
+<template class="gt-otns">
+    <require from="./gt-options.css"></require>
+    <require from="./gt-options-games"></require>
+    <require from="./gt-options-theme"></require>
+    <require from="./gt-options-region"></require>
+    <gt-tab-header close.call="close()">options</gt-tab-header>
+    <div class="gt-otns-content">
+        <gt-surface class="gt-otns-tabs-list">
+            <gt-list items.bind="tabs"
+                selected-item.two-way="selectedTab"
+                view-model.ref="tabsListCmnt"
+                item-css-class="gt-otns-tabs-list-item">
+                <template replace-part="item-template">
+                    ${item.title}
+                </template>
+            </gt-list>
+        </gt-surface>
+        <gt-surface class="gt-otns-tabs-content">
+            <gt-options-games if.bind="selectedTab.name == 'games'"></gt-options-games>
+            <gt-options-region if.bind="selectedTab.name == 'region'"></gt-options-region>
+            <gt-options-theme if.bind="selectedTab.name == 'theme'"></gt-options-theme>
+        </gt-surface>
+    </div>
+</template>

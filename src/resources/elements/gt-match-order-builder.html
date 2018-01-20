@@ -1,0 +1,130 @@
+<template class="gt-mobl"
+    tabindex="-1"
+    data-shortcut-names="search-match, cancel-match-search">
+    <require from="./gt-match-order-builder.css"></require>
+    <require from="./gt-match-order"></require>
+    <require from="./gt-match-order-details"></require>
+    <div class="gt-mobl-left-container"
+        data-shortcut-names="add-match-order">
+        <div class="gt-mobl-match-order-container au-animate"
+            if.bind="matchSearchStatus == 'none'">
+            <div>
+                <gt-surface class="gt-mobl-games-list-container">
+                    <gt-list items.bind="model.games"
+                        view-model.ref="gamesListCmnt"
+                        class="gt-mobl-games-list"
+                        item-css-class="gt-mobl-games-list-item"
+                        selected-item.two-way="model.matchOrderModel.game">
+                        <template replace-part="item-template">
+                            ${item.title}
+                        </template>
+                    </gt-list>
+                </gt-surface>
+                <gt-surface class="gt-mobl-match-order">
+                    <gt-match-order model.bind="model.matchOrderModel"
+                        open-servers-filter.call="openServersFilter()"
+                        region-changing.call="onRegionChanging(region)"
+                        view-model.ref="matchOrderCmnt"></gt-match-order>
+                </gt-surface>
+            </div>
+            <gt-tooltip class="gt-mobl-btn-add-match-tooltip"
+                disabled.bind="matchOrderCmnt.disabled"
+                disabled-text.bind="matchOrderCmnt.disabledText"
+                shortcut-name="add-match-order">
+                <mdc-button kind="raised"
+                    disabled.bind="matchOrderCmnt.disabled"
+                    class="gt-mobl-btn-add-match"
+                    click.delegate="addMatchOrder()">
+                    ${'gt-mobl.btn-add-match' & t}
+                </mdc-button>
+            </gt-tooltip>
+        </div>
+        <div class="gt-mobl-match-search-status-container au-animate"
+            if.bind="matchSearchStatus != 'none'">
+            <div class="gt-mobl-match-search-status au-animate"
+                if.bind="matchSearchStatus == 'initializing' || matchSearchStatus == 'searching'">
+                <gt-busy-icon></gt-busy-icon>
+                <div class="mdc-typography--headline">
+                    searching
+                </div>
+            </div>
+            <div class="gt-mobl-match-search-status au-animate"
+                if.bind="matchSearchStatus == 'connection-error-retrying'">
+                <div class="mdc-typography--headline gt-mobl-match-search-status-connection-error-message">
+                    <i class="material-icons">warning</i> Lost connection!
+                </div>
+                <gt-busy-icon></gt-busy-icon>
+                <div class="mdc-typography--headline">
+                    Attempting to reconnect...
+                </div>
+            </div>
+            <div class="gt-mobl-match-search-status au-animate"
+                if.bind="matchSearchStatus == 'error'">
+                <div class="mdc-typography--headline gt-mobl-match-search-status-error-message">
+                    <i class="material-icons">error</i> Error!
+                </div>
+                <div class="mdc-typography--headline">
+                    Please try again later.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="gt-mobl-right-container">
+        <gt-surface class="gt-mobl-match-orders-list-container au-animate"
+            data-shortcut-names="save-match-order-list, restore-match-order-list, clear-match-order-list">
+            <div class="gt-mobl-match-order-list-toolbar">
+                <gt-tooltip disabled.bind="saveMatchOrderListDisabled"
+                    disabled-text.bind="'gt-mobl.icon-save-match-order-list-disabled-text' & t"
+                    text.bind="'gt-mobl.icon-save-match-order-list' & t">
+                    <mdc-icon disabled.bind="saveMatchOrderListDisabled"
+                        click.delegate="saveUserMatchOrderList()">save</mdc-icon>
+                </gt-tooltip>
+                <gt-tooltip text.bind="'gt-mobl.icon-restore-match-order-list' & t"
+                    disabled.bind="restoreMatchOrderListDisabled"
+                    disabled-text.bind="restoreMatchOrderListDisabledText">
+                    <mdc-icon disabled.bind="restoreMatchOrderListDisabled"
+                        click.delegate="restoreUserMatchOrderList()">restore</mdc-icon>
+                </gt-tooltip>
+                <gt-tooltip text.bind="'gt-mobl.lbl-match-order-count' & t"
+                    class="gt-mobl-match-order-count-tooltip">
+                    <div>
+                        ${model.matchOrderModelList.length}/${commonData.matchOrderListMaxCount}
+                    </div>
+                </gt-tooltip>
+                <gt-tooltip text.bind="'gt-mobl.icon-clear-match-order-list' & t"
+                    disabled.bind="clearMatchOrderListDisabled"
+                    disabled-text.bind="clearMatchOrderListDisabledText">
+                    <mdc-icon disabled.bind="clearMatchOrderListDisabled"
+                        click.delegate="clearMatchOrderList()">delete_sweep</mdc-icon>
+                </gt-tooltip>
+            </div>
+            <gt-list item-css-class="gt-mobl-orders-list-item"
+                class="gt-mobl-match-orders-list"
+                view-model.ref="matchOrderListCmnt"
+                data-shortcut-names="edit-match-order, remove-match-order"
+                items.bind="model.matchOrderModelList">
+                <template replace-part="item-template">
+                    <gt-match-order-details is-active.bind="item == matchOrderListCmnt.selectedItem"
+                        match-order-modification-disabled.bind="matchSearchStatus != 'none'"
+                        model.bind="item"></gt-match-order-details>
+                </template>
+            </gt-list>
+        </gt-surface>
+        <gt-tooltip class="gt-mobl-btn-search-match-tooltip"
+            shortcut-name="search-match"
+            disabled.bind="searchMatchTooltipDisabled"
+            disabled-text.bind="'gt-mobl.btn-search-match-disabled-text' & t">
+            <mdc-button kind="raised"
+                disabled.bind="searchMatchDisabled"
+                click.delegate="btnSearchMatchClick()"
+                class="gt-mobl-btn-search-match">${btnSearchMatchText}</mdc-button>
+        </gt-tooltip>
+    </div>
+    <mdc-dialog view-model.ref="matchOrderLimitDialog"
+        is-footer-visible.one-time="false">
+        <div slot="header">The match order limit of ${commonData.matchOrderListMaxCount} items is reached.</div>
+        <div slot="body">
+            Please remove an item from match order before adding a new one.
+        </div>
+    </mdc-dialog>
+</template>

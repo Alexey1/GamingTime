@@ -1,0 +1,79 @@
+<template class="gt-sf"
+    data-shortcut-names="clear-selected-game-servers">
+    <require from="./gt-servers-filter.css"></require>
+    <gt-tab-header close.call="onClose()">servers filter for ${model.game.title}, ${model.mode}, ${model.region.title}</gt-tab-header>
+    <div class="gt-sf-content">
+        <gt-surface>
+            <div class="gt-sf-controls-part">
+                <mdc-textfield value.bind="serverLogin"
+                    view-model.ref="txtServerLogin"
+                    input.delegate="serversRequested($event.target.value)"
+                    placeholder="server login"></mdc-textfield>
+                <mdc-icon click.trigger="serversRequested(txtServerLogin.value)">refresh</mdc-icon>
+            </div>
+            <gt-list class="gt-sf-list"
+                is-lbl-more-visible.bind="isLblMoreVisible"
+                view-model.ref="lstAvailableServersCmnt"
+                is-loading.bind="isLoading"
+                data-shortcut-names="toggle-game-server-selection"
+                items.bind="availableGameServers">
+                <template replace-part="item-template">
+                    <div class="gt-sf-server"
+                        click.trigger="toggleServerSelection(item)">
+                        <mdc-checkbox checked.one-way="item.isSelected"></mdc-checkbox>
+                        <div class="gt-sf-server-info">
+                            <div>
+                                ${item.gameServer.login}
+                            </div>
+                            <div>
+                                ${item.gameServer.title}
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </gt-list>
+        </gt-surface>
+        <gt-surface>
+            <div class="gt-sf-controls-part gt-sf-controls-right-part">
+                <mdc-radio name="gt-sf-filter-type"
+                    model.bind="'exclude'"
+                    checked.bind="model.gameServersFilter.kind">exclude</mdc-radio>
+                <mdc-radio name="gt-sf-filter-type"
+                    model.bind="'only'"
+                    checked.bind="model.gameServersFilter.kind">use only</mdc-radio>
+                <div class="gt-sf-servers-count">
+                    ${model.gameServersFilter.gameServers.length}/${commonData.gameServersFilterMaxCount}
+                </div>
+                <div class="gt-sf-button-clear-container">
+                    <mdc-icon click.delegate="clearSelectedServers()">delete_sweep</mdc-icon>
+                </div>
+            </div>
+            <gt-list class="gt-sf-list"
+                items.bind="model.gameServersFilter.gameServers"
+                data-shortcut-names="remove-selected-game-server"
+                view-model.ref="selectedGameServersCmnt">
+                <template replace-part="item-template">
+                    <div class="gt-sf-server">
+                        <div class="gt-sf-server-info">
+                            <div>
+                                ${item.login}
+                            </div>
+                            <div>
+                                ${item.title}
+                            </div>
+                        </div>
+                        <mdc-icon focusable.one-time="false"
+                            click.trigger="removeSelectedServer(item)">delete</mdc-icon>
+                    </div>
+                </template>
+            </gt-list>
+        </gt-surface>
+    </div>
+    <mdc-dialog view-model.ref="limitDialog"
+        is-footer-visible.one-time="false">
+        <div slot="header">The servers count limit of ${commonData.gameServersFilterMaxCount} items is reached.</div>
+        <div slot="body">
+            Please remove a server before adding a new one.
+        </div>
+    </mdc-dialog>
+</template>

@@ -1,0 +1,110 @@
+.gt-mobl
+    --gt-mobl-games-list-width 10rem
+    display flex
+    margin default-margin
+    flex-grow 1
+    .gt-mobl-left-container
+        flex-basis calc(var(--gt-mobl-games-list-width) + 2 * var(--gt-default-margin))
+        flex-grow 1
+        display flex
+        position relative
+        .gt-mobl-match-order-container
+            display flex
+            flex-direction column
+            position absolute
+            left 0
+            top 0
+            right 0
+            bottom 0
+            > div
+                display flex
+                flex-grow 1
+                flex-basis 0
+                .gt-mobl-games-list-container
+                    width var(--gt-mobl-games-list-width)
+                    display flex
+                    margin var(--gt-default-margin)
+                    .gt-mobl-games-list
+                        flex-grow 1
+                    .gt-mobl-games-list-item
+                        padding var(--gt-default-margin)
+                        height 5rem
+                        justify-content center
+                        align-items center
+                        text-align center
+                .gt-mobl-match-order
+                    flex-basis 0
+                    flex-grow 1
+                    margin var(--gt-default-margin)
+                    padding var(--gt-default-margin)
+            > .gt-mobl-btn-add-match-tooltip
+                margin var(--gt-default-margin)
+                > .gt-mobl-btn-add-match
+                    width 100%
+        .gt-mobl-match-search-status-container
+            position absolute
+            left 0
+            top 0
+            right 0
+            bottom 0
+            .gt-mobl-match-search-status
+                position absolute
+                left 0
+                top 0
+                right 0
+                bottom 0
+                display flex
+                align-items center
+                justify-content center
+                flex-direction column
+                > *
+                    margin var(--gt-default-margin)
+                .gt-mobl-match-search-status-connection-error-message
+                    display flex
+                    align-items center
+                    justify-content center
+                    > i
+                        color orange
+                        margin-right var(--gt-default-margin)
+                        font-size 2rem
+                .gt-mobl-match-search-status-error-message
+                    display flex
+                    align-items center
+                    justify-content center
+                    > i
+                        color red
+                        margin-right var(--gt-default-margin)
+                        font-size 2rem
+    .gt-mobl-right-container
+        flex-basis 0
+        flex-grow 1
+        display flex
+        flex-direction column
+        .gt-mobl-match-orders-list-container
+            flex-grow 1
+            flex-basis 0
+            display flex
+            margin var(--gt-default-margin)
+            flex-direction column
+            .gt-mobl-match-order-list-toolbar
+                display flex
+                flex-shrink 0
+                padding var(--gt-default-margin)
+                align-items center
+                .gt-mobl-match-order-count-tooltip
+                    margin-left auto
+                    margin-right calc(2*var(--gt-default-margin))
+            .gt-mobl-match-orders-list
+                flex-grow 1
+                .gt-mobl-orders-list-item
+                    padding var(--gt-default-margin)
+        .gt-mobl-btn-search-match-tooltip
+            margin var(--gt-default-margin)
+            .gt-mobl-btn-search-match
+                width 100%
+    .gt-mobl-found
+        position absolute
+        top 0
+        left 0
+        bottom 0
+        right 0

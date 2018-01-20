@@ -1,0 +1,29 @@
+:root
+    --mdc-theme-primary #4885f3
+
+.mdc-checkbox:not(.sty)
+    box-sizing content-box
+
+.mdc-text-field__input:not(.sty):focus::placeholder
+    color var(--mdc-theme-text-hint-on-light)
+
+.mdc-theme--dark
+    .mdc-text-field__input:not(.sty):focus::placeholder
+        color var(--mdc-theme-text-hint-on-dark)
+
+.mdc-text-field--fullwidth:not(.sty)
+    height unset
+    > .mdc-text-field__input
+        padding-bottom var(--gt-default-margin)
+
+.mdc-list-item.gt-app-active-item::before
+    opacity 0.12
+
+.mdc-theme--dark .mdc-dialog--open .mdc-dialog__backdrop
+    opacity 0.7
+
+.mdc-form-field
+    font-size unset
+    font-weight unset
+    letter-spacing unset
+    line-height unset

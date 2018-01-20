@@ -1,0 +1,20 @@
+<template class="gt-sct mdc-select"
+    tabindex="0"
+    keydown.trigger="onKeydown($event)"
+    click.delegate="onClick($event)">
+    <!-- using keydown.trigger above instead of keydown delegate
+    to be able to stop propagation to avoid triggering a command -->
+    <require from="./gt-select.css"></require>
+    <div class="gt-sct-display">
+        ${selectedItem.title}
+    </div>
+    <div element.ref="dropdownElement"
+        class="gt-sct-dropdown mdc-simple-menu mdc-select__menu  ${isDropdownOpen ? 'mdc-simple-menu--open' : ''}">
+        <ul class="mdc-list mdc-simple-menu__items">
+            <li class="mdc-list-item ${item == highlightedItem ? 'gt-app-active-item' : ''}"
+                click.delegate="onItemClick(item)"
+                data-item.bind="item.name"
+                repeat.for="item of items">${item.title}</li>
+        </ul>
+    </div>
+</template>

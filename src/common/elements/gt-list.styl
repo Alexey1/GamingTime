@@ -1,0 +1,26 @@
+.gt-lst
+    display flex
+    flex-direction column
+    position relative
+    .gt-lst-content-wrapper
+        position relative
+        overflow-x hidden
+        overflow-y auto
+        flex-grow 1
+        flex-basis 0 //for FF
+        .gt-lst-content
+            min-height 100%
+            position relative
+            display flex
+            flex-direction column
+        .gt-lst-item
+            display flex
+            flex-shrink 0 //for Chrome
+            cursor default
+        .gt-lst-item-active
+            background-color var(--gt-active-item-bg)
+            transition 120ms
+            &:focus
+                background-color var(--gt-focused-active-item-bg)
+        .gt-lst-more-lbl
+            padding var(--gt-default-margin)

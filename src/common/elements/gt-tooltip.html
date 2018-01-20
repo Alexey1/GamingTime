@@ -1,0 +1,22 @@
+<template class="gt-ttp"
+    mouseenter.trigger="onMouseEnter()"
+    mouseleave.trigger="onMouseLeave()">
+    <require from="./gt-tooltip.css"></require>
+    <slot></slot>
+    <div class="gt-ttp-content"
+        element.ref="ttpContentEl">
+        <div class="gt-ttp-content-background">
+            <div class="gt-ttp-label">
+                ${text}
+                <template if.bind="shortcutKeys">
+                    (${shortcutKeys})
+                </template>
+            </div>
+            <div class="gt-ttp-disabled-label">
+                <template if.bind="disabled && disabledText">
+                    DISABLED: ${disabledText}
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

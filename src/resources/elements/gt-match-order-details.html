@@ -1,0 +1,30 @@
+<template class="gt-mod">
+    <require from="./gt-match-order-details.css"></require>
+    <div class="gt-mod-content">
+        <div>${model.game.title}</div>
+        <div>${model.mode}</div>
+        <div>${model.playersCount}+ players</div>
+        <div if.bind="model.gameServersFilter.gameServers.length > 0">
+            <template if.bind="model.gameServersFilter.kind == 'exclude'">exclude</template>
+            <template if.bind="model.gameServersFilter.kind == 'only'">use only</template>
+            ${model.gameServersFilter.gameServers.length} servers
+        </div>
+        <div>${model.region.title}</div>
+    </div>
+    <div>
+        <gt-tooltip text.bind="'gt-mod.icon-edit' & t"
+            disabled.bind="editMatchOrderDisabled"
+            disabled-text.bind="editMatchOrderDisabledText">
+            <mdc-icon focusable.one-time="false"
+                disabled.bind="editMatchOrderDisabled"
+                click.delegate="editMatchOrder()">mode_edit</mdc-icon>
+        </gt-tooltip>
+        <gt-tooltip text.bind="'gt-mod.icon-remove' & t"
+            disabled.bind="matchOrderModificationDisabled"
+            disabled-text.bind="'gt-mod.icon-remove-disabled-text' & t">
+            <mdc-icon focusable.one-time="false"
+                disabled.bind="matchOrderModificationDisabled"
+                click.delegate="removeMatchOrder()">delete</mdc-icon>
+        </gt-tooltip>
+    </div>
+</template>
